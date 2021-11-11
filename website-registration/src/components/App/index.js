@@ -39,16 +39,14 @@ const App = () => {
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
-              {isRegistered && 
-                <>
-                  <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to={() => history.push('/protected-one')}>Protected page</Link>
-                  </li>
+                <li className="nav-item">
+                  <Link className="nav-link active" aria-current="page" to="/protected-one">Protected page</Link>
+                </li>
+                {isRegistered && 
                   <li className="nav-item">
                     <Link className="nav-link active" aria-current="page" to="/protected-two">Protected page</Link>
                   </li>
-                </>
-              }
+                }
               <li className="nav-item">
                 <Link className="nav-link active" aria-current="page" to="/unprotected">Unprotected page</Link>
               </li>
@@ -62,9 +60,9 @@ const App = () => {
       <LogIn logInFunc={() => setIsRegistered(true)} logOutFunc={() => setIsRegistered(false)}/>
       <GuardProvider guards={[requireLogin]}>
         <Switch>
-          <Route exact path='/' component={HomePage}/>
-          <Route path='/unprotected' component={UnprotectedPage}/>
-          <GuardedRoute path='/protected-one' component={ProtectedPageOne} meta={{auth: true}}/>
+          <GuardedRoute exact path="/" component={HomePage}/>
+          <GuardedRoute path="/unprotected" exact component={UnprotectedPage} meta={{auth: true}}/>
+          <GuardedRoute path="/protected-one" exact component={ProtectedPageOne} meta={{auth: true}}/>
         </Switch>
       </GuardProvider>
     </Router>
