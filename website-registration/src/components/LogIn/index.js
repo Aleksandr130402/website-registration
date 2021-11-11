@@ -1,6 +1,6 @@
 import './style.css';
 
-const LogIn = ({logInFunc, logOutFunc}) => {
+const LogIn = ({logInFunc, logOutFunc, inputValue, handleInputChange}) => {
 	return (
 		<div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div className="modal-dialog">
@@ -10,6 +10,7 @@ const LogIn = ({logInFunc, logOutFunc}) => {
             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div className="modal-body">
+            <input placeholder="login" value={inputValue} onChange={handleInputChange}/>
             <button onClick={logInFunc}>Log in</button>
 						<button onClick={logOutFunc}>Log out</button>
           </div>
