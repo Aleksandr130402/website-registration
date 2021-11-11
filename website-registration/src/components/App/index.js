@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch, useHistory } from 'react-router-dom';
 
 import GuardedRoute from '../GuardedRoute';
 import { HomePage, UnprotectedPage, UserAbout, UserCart } from '../../pages';
@@ -12,9 +12,12 @@ const App = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [user, setUser] = useState('');
 
+  const history = useHistory();
+
   const logIn = () => {
     if(user !== '') {
       setIsRegistered(true);
+      history.push(`/user-about/${user}`);
     }
   }
 
@@ -37,7 +40,7 @@ const App = () => {
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link active" aria-current="page" to="/user-about">User about</Link>
+                <Link className="nav-link active" aria-current="page" to={`/user-about/${user}`}>User about</Link>
               </li>
               {isRegistered && 
                 <li className="nav-item">
@@ -66,7 +69,7 @@ const App = () => {
           path='/'
           component={HomePage}
         />
-        <GuardedRoute path='/user-about' props={user} component={UserAbout} auth={isRegistered}/>
+        <GuardedRoute path='/user-about/:user?' component={UserAbout} auth={isRegistered}/>
         <GuardedRoute path='/user-cart' component={UserCart} auth={isRegistered}/>
         <Route path='/unprotected' component={UnprotectedPage}/>
       </Switch>
