@@ -2,7 +2,7 @@ import './style.css';
 
 const UserCart = () => {
 	return (
-		<div>User cart</div>
+		<div className="user-cart page">User cart</div>
 	)
 }
 

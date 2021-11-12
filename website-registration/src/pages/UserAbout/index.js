@@ -5,8 +5,9 @@ import './style.css';
 const UserAbout = () => {
 
 	let {user} = useParams();
+	
 	return (
-		<div>Hello, {user}</div>
+		<div className="user-about page">Hello, {user}</div>
 	)
 }
 

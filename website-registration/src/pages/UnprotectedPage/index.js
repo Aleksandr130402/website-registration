@@ -2,7 +2,7 @@ import './style.css';
 
 const UnprotectedPage = () => {
 	return (
-		<div>Unprotected Page</div>
+		<div className="unprotected page">Unprotected Page</div>
 	)
 }
 
