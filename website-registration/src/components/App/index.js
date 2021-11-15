@@ -29,43 +29,42 @@ const App = () => {
     setIsRegistered(false);
   }
 
-
   return (
     <>
       <header className="container-fluid">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <Link className="navbar-brand" to="/">Navbar</Link>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
+        <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <Link className="navbar-brand" to="/">Navbar</Link>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav ms-auto me-lg-5">
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/">Home</Link>
+              </li>
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to={`/user-about/${user}`}>User about</Link>
+              </li>
+              {isRegistered && 
+                <li className="nav-item">
+                  <Link className="nav-link active" aria-current="page" to="/user-cart">Cart</Link>
+                </li>               
+              }
+              <li className="nav-item">
+                <Link className="nav-link active" aria-current="page" to="/unprotected">Unprotected page</Link>
+              </li>
+            </ul> 
+            <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+              Log in
             </button>
-            <div className="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul className="navbar-nav ms-auto me-lg-5">
-                <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="/">Home</Link>
-                </li>
-                <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to={`/user-about/${user}`}>User about</Link>
-                </li>
-                {isRegistered && 
-                  <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/user-cart">Cart</Link>
-                  </li>               
-                }
-                <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="/unprotected">Unprotected page</Link>
-                </li>
-              </ul> 
-              <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                Log in
-              </button>
-            </div>
-          </nav>
-          <LogIn 
-            logInFunc={() => logIn()} 
-            logOutFunc={() => logOut()}
-            inputValue={user}
-            handleInputChange={(e) => setUser(e.target.value)}
-          />
+          </div>
+        </nav>
+        <LogIn 
+          logInFunc={() => logIn()} 
+          logOutFunc={() => logOut()}
+          inputValue={user}
+          handleInputChange={(e) => setUser(e.target.value)}
+        />
       </header>
       <section className="container">
         <TransitionGroup>
