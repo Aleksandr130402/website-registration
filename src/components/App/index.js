@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Router } from "react-router";
 import { createBrowserHistory } from "history";
-import { Link, Route, Switch } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 
-import { HomePage, UnprotectedPage, ProtectedPageOne } from '../../pages';
+import { HomePage, UnprotectedPage, ProtectedPageOne,ProtectedPageTwo, NotFound, Loading } from '../../pages';
 import LogIn from '../LogIn';
 
 import './style.css';
@@ -13,10 +13,13 @@ const history = createBrowserHistory();
 
 const App = () => { 
   const [isRegistered, setIsRegistered] = useState(false);
+  // const isRegistered = false;
 
+  console.log(isRegistered)
   const requireLogin = (to, from, next) => {
+    console.log(isRegistered)
     if (to.meta.auth) {
-      console.log("auth true");
+      console.log(isRegistered)
       if (isRegistered) {
         next();
       }
@@ -40,11 +43,11 @@ const App = () => {
                 <Link className="nav-link active" aria-current="page" to="/">Home</Link>
               </li>
                 <li className="nav-item">
-                  <Link className="nav-link active" aria-current="page" to="/protected-one">Protected page</Link>
+                  <Link className="nav-link active" aria-current="page" to="/protected-one">Protected page 1</Link>
                 </li>
                 {isRegistered && 
                   <li className="nav-item">
-                    <Link className="nav-link active" aria-current="page" to="/protected-two">Protected page</Link>
+                    <Link className="nav-link active" aria-current="page" to="/protected-two">Protected page 2</Link>
                   </li>
                 }
               <li className="nav-item">
@@ -58,11 +61,12 @@ const App = () => {
         </div>
       </nav>
       <LogIn logInFunc={() => setIsRegistered(true)} logOutFunc={() => setIsRegistered(false)}/>
-      <GuardProvider guards={[requireLogin]}>
+      <GuardProvider guards={requireLogin} loading={Loading} error={NotFound}>
         <Switch>
           <GuardedRoute exact path="/" component={HomePage}/>
-          <GuardedRoute path="/unprotected" exact component={UnprotectedPage} meta={{auth: true}}/>
+          <GuardedRoute path="/unprotected" component={UnprotectedPage} />
           <GuardedRoute path="/protected-one" exact component={ProtectedPageOne} meta={{auth: true}}/>
+          <GuardedRoute path="/protected-two" exact component={ProtectedPageTwo} meta={{auth: true}}/>
         </Switch>
       </GuardProvider>
     </Router>
