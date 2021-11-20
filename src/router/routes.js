@@ -10,7 +10,7 @@ const getRoutes = () => [
     error: 'Custom error for home page',
     meta: {
       [AUTH_ONLY]: true,
-    },
+    }
   },
   {
     path: '/protected-one',
@@ -18,12 +18,15 @@ const getRoutes = () => [
     component: ProtectedOne,
     meta: {
       [AUTH_ONLY]: true,
-    },
+    }
   },
   {
     path: '/protected-two',
     exact: true,
-    component: ProtectedTwo
+    component: ProtectedTwo,
+    meta: {
+      [AUTH_ONLY]: true,
+    }
   },
   {
     path: '/unprotected',

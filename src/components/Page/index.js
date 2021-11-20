@@ -4,13 +4,16 @@ import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {IconButton} from '@mui/material';
 
+import { getIsLoggedIn } from '../../utils';
 import Login from '../Login';
 
 import './page.scss';
 
 
+
 const Page = ({ children }) => {
   
+  const isLoggedIn = getIsLoggedIn();
 	const [open, setOpen] = useState(false);
 
   return (
@@ -18,7 +21,10 @@ const Page = ({ children }) => {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/protected-one">Protected 1</Link>
-        <Link to="/protected-two">Protected 2</Link>
+        {
+          isLoggedIn &&
+          <Link to="/protected-two">Protected 2</Link>
+        }
 				<Link to="/unprotected">Unprotected</Link>
 				<IconButton onClick={() => setOpen(true)}>
 					<AccountCircleIcon/>

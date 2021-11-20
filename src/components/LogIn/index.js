@@ -1,4 +1,3 @@
-import { Redirect } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import {Button, Box, Typography, Modal} from '@mui/material';
 
