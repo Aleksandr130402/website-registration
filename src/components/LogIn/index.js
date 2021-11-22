@@ -1,8 +1,9 @@
 import { useHistory } from 'react-router';
-import {Button, Box, Typography, Modal} from '@mui/material';
+import {Button, Box, Typography, Modal, Input} from '@mui/material';
 
 import { getIsLoggedIn } from '../../utils';
 import { STORAGE_KEYS } from '../../utils/constants';
+import { useState } from 'react';
 
 
 const style = {
@@ -17,14 +18,22 @@ const style = {
   p: 4,
 };
 
-const Login = ({open, handleClose }) => {
+const Login = ({open, handleClose, inputValue, handleInputChange }) => {
 
   const {push} = useHistory();
   const isLoggedIn = getIsLoggedIn();
+  const [isWarning, setIsWarning] = useState(false);
 
   const login = () => {
-    localStorage.setItem(STORAGE_KEYS.IS_LOGGED_IN, 'true');
-    push('/');
+    if(inputValue !== '') {
+      localStorage.setItem(STORAGE_KEYS.IS_LOGGED_IN, 'true');
+      push(`/user-about/${inputValue}`);
+    } else {
+      setIsWarning(true);
+      setTimeout(() => {
+        setIsWarning(false);
+      }, 2000);
+    }
   };
 
   const logout = () => {
@@ -46,7 +55,10 @@ const Login = ({open, handleClose }) => {
           </Typography>
           {
           !isLoggedIn ? 
-            <Button onClick={login}>Log in</Button> :
+            <>
+              <Input value={inputValue} onChange={handleInputChange} error={isWarning} placeholder="User name"/>
+              <Button onClick={login}>Log in</Button>
+            </> :
             <Button onClick={logout}>Log out</Button>
           }
         </Box>

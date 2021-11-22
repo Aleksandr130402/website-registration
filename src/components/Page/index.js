@@ -1,38 +1,43 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import {Box, Typography} from '@mui/material';
 import {IconButton} from '@mui/material';
 
 import { getIsLoggedIn } from '../../utils';
 import Login from '../Login';
+import NavLink from '../NavLink';
 
 import './page.scss';
-
 
 
 const Page = ({ children }) => {
   
   const isLoggedIn = getIsLoggedIn();
 	const [open, setOpen] = useState(false);
+  const [user, setUser] = useState('');
 
   return (
-    <div>
+    <div className="page">
       <nav>
-        <Link to="/">Home</Link>
-        <Link to="/protected-one">Protected 1</Link>
+        <ul>
+        <NavLink to="/">Home</NavLink>
+        <NavLink to={`/user-about/${user}`}>Protected 1</NavLink>
         {
           isLoggedIn &&
-          <Link to="/protected-two">Protected 2</Link>
+          <NavLink to="/user-cart">Protected 2</NavLink>
         }
-				<Link to="/unprotected">Unprotected</Link>
-				<IconButton onClick={() => setOpen(true)}>
-					<AccountCircleIcon/>
-				</IconButton>				
+				<NavLink to="/unprotected">Unprotected</NavLink>			
+        </ul>
+        <IconButton className="icon-button" onClick={() => setOpen(true)}>
+          <AccountCircleIcon/>
+        </IconButton>	
       </nav>
       <Login 
         open={open}
         handleClose={() => setOpen(false)}
+        inputValue={user}
+        handleInputChange={(e) => setUser(e.target.value)}
       />
       <main>
 				{children}

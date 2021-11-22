@@ -1,4 +1,4 @@
-import { ProtectedOne, ProtectedTwo, Home, NotFound, Unprotected } from '../containers';
+import { UserAbout, UserCart, Home, NotFound, Unprotected } from '../containers';
 import { AUTH_ONLY } from '../router/types';
 
 const getRoutes = () => [
@@ -13,17 +13,17 @@ const getRoutes = () => [
     }
   },
   {
-    path: '/protected-one',
+    path: '/user-about/:user?',
     exact: true,
-    component: ProtectedOne,
+    component: UserAbout,
     meta: {
       [AUTH_ONLY]: true,
     }
   },
   {
-    path: '/protected-two',
+    path: '/user-cart',
     exact: true,
-    component: ProtectedTwo,
+    component: UserCart,
     meta: {
       [AUTH_ONLY]: true,
     }
