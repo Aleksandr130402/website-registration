@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { NotFound } from '../containers';
+import NotFound from '../containers/NotFound';
 import requireLogin from './guards/requireLogin';
 import getRoutes from './routes';
 
@@ -14,11 +14,12 @@ const Router = ({ children }) => {
   return (
     <BrowserRouter>
       <GuardProvider guards={[requireLogin]} loading="Loading..." error={NotFound}>
-          
+        
         <Route
           render={routeProps =>          
             children(
-            <TransitionGroup>                                   
+            <TransitionGroup>
+              <Switch>                                              
                 {routes.map(({ component: Component, error, exact, ignoreGlobal, loading, meta, path }, i) => (   
                   <GuardedRoute
                     key={i}
@@ -28,18 +29,23 @@ const Router = ({ children }) => {
                     loading={loading}
                     meta={meta}
                     path={path}
-                  >
-                    <CSSTransition
-                      in={routeProps.match != null && !ignoreGlobal}
-                      timeout={300}
-                      classNames="page"
-                      unmountOnExit
-                    >
-                      <Component/>
-                    </CSSTransition>
+                  >  
+                    {
+                      ignoreGlobal ? 
+                        <Component/> : 
+                        <CSSTransition
+                          in={routeProps.match != null}
+                          timeout={300}
+                          classNames="page"
+                          unmountOnExit
+                        >
+                          <Component/>
+                        </CSSTransition>
+                    }                                                   
                   </GuardedRoute>
                 ))}
-              </TransitionGroup> ,
+                </Switch>
+              </TransitionGroup>,
               routeProps,
             )
           }

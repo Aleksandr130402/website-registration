@@ -1,4 +1,5 @@
-import { UserAbout, UserCart, Home, NotFound, Unprotected } from '../containers';
+import { UserAbout, UserCart, Home, Unprotected } from '../containers';
+import NotFound from '../containers/NotFound';
 import { AUTH_ONLY } from '../router/types';
 
 const getRoutes = () => [
