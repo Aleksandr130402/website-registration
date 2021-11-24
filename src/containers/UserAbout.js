@@ -5,7 +5,12 @@ const UserAbout = () => {
 	const { user } = useParams();
 	
 	return (
-		<div>Hello, {user}</div>	
+		<div 
+			className="page" 
+			style={{background: "green", paddingTop: "12px"}}
+		>
+			Hello, {user}
+		</div>	
 	)
 }
 

@@ -1,6 +1,11 @@
 const Unprotected = () => {
 	return (
-		<div>Unprotected Page</div>
+		<div 
+			className="page" 
+			style={{background: "yellow", paddingTop: "12px"}}
+		>
+			Unprotected Page
+		</div>
 	)
 }
 

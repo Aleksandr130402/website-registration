@@ -1,6 +1,11 @@
 const Home = () => {
 	return (
-		<div>Home page</div>
+		<div 
+			className="page" 
+			style={{background: "red", paddingTop: "12px"}}
+		>
+			Home page
+		</div>
 	)
 }
 

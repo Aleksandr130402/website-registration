@@ -1,6 +1,11 @@
 const UserCart = () => {
 	return (
-		<div>User's cart</div>
+		<div 
+			className="page" 
+			style={{background: "aqua", paddingTop: "12px"}}
+		>
+			User's cart
+		</div>
 	)
 }
 

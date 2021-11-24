@@ -1,14 +1,13 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import {Box, Typography} from '@mui/material';
 import {IconButton} from '@mui/material';
 
 import { getIsLoggedIn } from '../../utils';
 import Login from '../Login';
 import NavLink from '../NavLink';
 
-import './page.scss';
+import './style.scss';
 
 
 const Page = ({ children }) => {
@@ -18,7 +17,7 @@ const Page = ({ children }) => {
   const [user, setUser] = useState('');
 
   return (
-    <div className="page">
+    <div className="container">
       <nav>
         <ul>
         <NavLink to="/">Home</NavLink>
@@ -40,7 +39,7 @@ const Page = ({ children }) => {
         handleInputChange={(e) => setUser(e.target.value)}
       />
       <main>
-				{children}
+        {children}
 			</main>
       <footer />
     </div>
