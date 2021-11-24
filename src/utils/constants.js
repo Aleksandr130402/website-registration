@@ -1,3 +1,4 @@
 export const STORAGE_KEYS = Object.freeze({
-	IS_LOGGED_IN: 'isLoggedIn'
+	IS_LOGGED_IN: 'isLoggedIn',
+	USER: 'user'
 });

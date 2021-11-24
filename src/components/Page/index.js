@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import {IconButton} from '@mui/material';
@@ -6,15 +6,21 @@ import {IconButton} from '@mui/material';
 import { getIsLoggedIn } from '../../utils';
 import Login from '../Login';
 import NavLink from '../NavLink';
+import getUser from '../../utils/getUser';
 
 import './style.scss';
 
 
 const Page = ({ children }) => {
   
+  const getUserFromStorage = getUser();
   const isLoggedIn = getIsLoggedIn();
 	const [open, setOpen] = useState(false);
   const [user, setUser] = useState('');
+
+  useEffect(() => {
+    setUser(getUserFromStorage);
+  }, [getUserFromStorage]);
 
   return (
     <div className="container">

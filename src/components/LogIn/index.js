@@ -27,6 +27,7 @@ const Login = ({open, handleClose, inputValue, handleInputChange }) => {
   const login = () => {
     if(inputValue !== '') {
       localStorage.setItem(STORAGE_KEYS.IS_LOGGED_IN, 'true');
+      localStorage.setItem(STORAGE_KEYS.USER, inputValue);
       push(`/user-about/${inputValue}`);
     } else {
       setIsWarning(true);
